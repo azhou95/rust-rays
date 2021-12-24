@@ -2,11 +2,14 @@ use core::fmt;
 
 use std::ops::{Add, Sub, Neg, Mul, Div};
 
+pub type Point3 = Vec3;
+pub type Color = Vec3;
+
 #[derive(Clone, Copy)]
 pub struct Vec3 {
-    x: f64,
-    y: f64,
-    z: f64,
+    pub x: f64,
+    pub y: f64,
+    pub z: f64,
 }
 
 
@@ -37,6 +40,15 @@ impl Vec3 {
         self.x * self.x
         + self.y * self.y
         +self.z * self.z
+    }
+
+    pub fn unit_vector(&self) -> Vec3 {
+        let length = self.length();
+        Vec3 {
+            x: self.x / length,
+            y: self.y / length,
+            z: self.z / length
+        }
     }
 
     pub fn to_rgb(&self) -> String {
